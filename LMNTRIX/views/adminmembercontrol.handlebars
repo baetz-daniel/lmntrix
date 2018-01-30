@@ -1,0 +1,92 @@
+<script type="text/javascript" src="/javascript/confirmation.js"></script>
+<script type="text/javascript" src="/javascript/tablefilter.js"></script>
+<div id="page">
+    <div class="wrapper">
+        <div class="container25">
+            <div class="container100">
+                <h1>ADMIN - MEMBER - CONTROL</h1>
+            </div>
+            <div class="spacer"></div>
+            <div class="container100">
+                <input type="text" id="filter" onkeyup="applyFilter(this)" placeholder="search for name[s]...">
+            </div>
+            <div class="spacer1"></div>
+            <div class="container100">
+                <div class="table">
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            <a href="/admin/member/name/{{#ifc orderby 'name'}}{{#ifc mode 'ASC'}}DESC{{else}}ASC{{/ifc}}{{else}}ASC{{/ifc}}">Name:</a>&nbsp;{{#ifc orderby 'name'}} {{#ifc mode 'ASC'}}&darr;{{else}}&uarr;{{/ifc}} {{/ifc}}
+                        </div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">{{name}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            <a href="/admin/member/role/{{#ifc orderby 'role'}}{{#ifc mode 'ASC'}}DESC{{else}}ASC{{/ifc}}{{else}}ASC{{/ifc}}">Roles:</a>&nbsp;{{#ifc orderby 'role'}} {{#ifc mode 'ASC'}}&darr;{{else}}&uarr;{{/ifc}} {{/ifc}}
+                        </div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">{{role}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            <a href="/admin/member/dkp/{{#ifc orderby 'dkp'}}{{#ifc mode 'ASC'}}DESC{{else}}ASC{{/ifc}}{{else}}ASC{{/ifc}}">DKP:</a>&nbsp;{{#ifc orderby 'dkp'}} {{#ifc mode 'ASC'}}&darr;{{else}}&uarr;{{/ifc}} {{/ifc}}
+                        </div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">{{dkp}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            Timestamp:
+                        </div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">{{pt timestamp}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumnFix150">
+                        <div class="tableHeader"></div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">
+                            <button type="submit" class="button2" onclick="ShowConfirmDialog('/admin/member/{{../orderby}}/{{../mode}}/delete/{{name}}', 'Are you sure to delete this member?')">*delete*</button>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="container1">
+                <div class="container100">
+                    <form action="/admin/member/{{orderby}}/{{mode}}/add" method="post">
+                        <input type="hidden" name="editor" value="{{userinfo.name}}" />
+                        <div class="table">
+                            <div class="tableColumnFix150">
+                                <div class="tableRowNS">Name:</div>
+                                <div class="tableRowNS">Role:</div>
+                                <div class="tableRowNS">DKP:</div>
+                            </div>
+                            <div class="tableColumnFix250">
+                                <div class="tableRowNS">
+                                    <input type="text" name="name" placeholder="name" maxlength="32" required />
+                                </div>
+                                <div class="tableRowNS">
+                                    <div required>
+                                        TANK<input type="checkbox" name="role[]" value="TANK" />
+                                        MDD<input type="checkbox" name="role[]" value="MDD" />
+                                        RDD<input type="checkbox" name="role[]" value="RDD" />
+                                        HEAL<input type="checkbox" name="role[]" value="HEAL" />
+                                    </div>
+                                </div>
+                                <div class="tableRowNS">
+                                    <input type="text" name="dkp" value="0" pattern="[0-9]+" required />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="buttonFix300">*ADD*</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

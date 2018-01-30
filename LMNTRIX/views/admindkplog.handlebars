@@ -1,0 +1,111 @@
+<script>const wowhead_tooltips = { "colorlinks": true, "iconizelinks": true, "renamelinks": true }</script>
+<script type="text/javascript" src="http://static.wowhead.com/widgets/power.js"></script>
+<script type="text/javascript" src="/javascript/confirmation.js"></script>
+
+<div id="page">
+    <div class="wrapper">
+        <div class="container25">
+            <div class="container100">
+                <h1>ADMIN - DKPLOG</h1>
+            </div>
+            <div class="container100">
+                <h2>DKP-LOG for: '{{memberinfo.name}}'</h2>
+                <h3>current DKP: {{memberinfo.dkp}}</h3>
+            </div>
+            <div class="spacer"></div>
+            <div class="container100">
+                <div class="table">
+                    <div class="tableColumnFix200">
+                        <div class="tableHeader">
+                            Kind:
+                        </div>
+                        {{#each dkploginfo}}
+                        <div class="tableRow">{{kind}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn50">
+                        <div class="tableHeader">
+                            Timestamp:
+                        </div>
+                        {{#each dkploginfo}}
+                        <div class="tableRow">{{pt timestamp}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            Information:
+                        </div>
+                        {{#each dkploginfo}}
+                        <div class="tableRow">
+                            {{#ifc kind '-dkp_item'}}
+                            <a href="#" rel="item={{information}}&domain=de">ITEM-ID: {{information}}</a>
+                            {{else}}
+                            {{information}}
+                            {{/ifc}}
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumnFix150">
+                        <div class="tableHeader">
+                            Value:
+                        </div>
+                        {{#each dkploginfo}}
+                        <div class="tableRow">{{value}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumnFix150">
+                        <div class="tableHeader">
+                            Editor:
+                        </div>
+                        {{#each dkploginfo}}
+                        <div class="tableRow">{{editor}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumnFix150">
+                        <div class="tableHeader"></div>
+                        {{#each dkploginfo}}
+                        <div class="tableRow"><button type="submit" class="button2" onclick="ShowConfirmDialog('/admin/dkplog/{{../memberinfo.name}}/delete/{{uuid}}', 'Are you sure to delete this entry?')">*delete*</button></div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="container1">
+                <div class="container100">
+                    <form action="/admin/dkplog/{{memberinfo.name}}/add" method="post">
+                        <input type="hidden" name="editor" value="{{userinfo.name}}" />
+                        <div class="table">
+                            <div class="tableColumnFix150">
+                                <div class="tableRowNS">Kind:</div>
+                                <div class="tableRowNS">Information:</div>
+                                <div class="tableRowNS">Value:</div>
+                            </div>
+                            <div class="tableColumnFix200">
+                                <div class="tableRowNS">
+                                    <select name="kind" size="1" required>
+                                        <option value="-dkp_item">-DKP Item</option>
+                                        <option value="-dkp">-DKP</option>
+                                        <option value="+dkp">+DKP</option>
+                                    </select>
+                                </div>
+                                <div class="tableRowNS">
+                                    <input type="text" name="information" placeholder="item-id or other information" maxlength="128" required />
+                                </div>
+                                <div class="tableRowNS">
+                                    <input type="text" name="value" placeholder="value" pattern="[0-9]+" required />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="buttonFix300">*ADD*</button>
+                    </form>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="container100">
+                <form action="/admin/dkp" method="post">
+                    <button type="submit">Zur&uuml;ck zur DKP &Uuml;bersicht</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

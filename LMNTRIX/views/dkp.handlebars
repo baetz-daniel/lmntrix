@@ -1,0 +1,45 @@
+<script type="text/javascript" src="/javascript/tablefilter.js"></script>
+<div id="page">
+    <div class="wrapper">
+        <div class="container25">
+            <div class="container100">
+                <input type="text" id="filter" onkeyup="applyFilter(this)" placeholder="search for name[s]...">
+            </div>
+            <div class="spacer1"></div>
+            <div class="container100">
+                <div class="table">
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            <a href="/dkp/name/{{#ifc orderby 'name'}}{{#ifc mode 'ASC'}}DESC{{else}}ASC{{/ifc}}{{else}}ASC{{/ifc}}">Name:</a>&nbsp;{{#ifc orderby 'name'}} {{#ifc mode 'ASC'}}&darr;{{else}}&uarr;{{/ifc}} {{/ifc}}
+                        </div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">{{name}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            <a href="/dkp/role/{{#ifc orderby 'role'}}{{#ifc mode 'ASC'}}DESC{{else}}ASC{{/ifc}}{{else}}ASC{{/ifc}}">Roles:</a>&nbsp;{{#ifc orderby 'role'}} {{#ifc mode 'ASC'}}&darr;{{else}}&uarr;{{/ifc}} {{/ifc}}
+                        </div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">{{role}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn">
+                        <div class="tableHeader">
+                            <a href="/dkp/dkp/{{#ifc orderby 'dkp'}}{{#ifc mode 'ASC'}}DESC{{else}}ASC{{/ifc}}{{else}}ASC{{/ifc}}">DKP:</a>&nbsp;{{#ifc orderby 'dkp'}} {{#ifc mode 'ASC'}}&darr;{{else}}&uarr;{{/ifc}} {{/ifc}}
+                        </div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}">{{dkp}}</div>
+                        {{/each}}
+                    </div>
+                    <div class="tableColumn">
+                        <div class="tableHeader"></div>
+                        {{#each membersinfo}}
+                        <div class="tableRow" id="{{name}}"><form action="/dkplog/{{name}}" method="post"><button type="submit" class="button2">*DKP-LOG*</button></form></div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

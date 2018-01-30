@@ -1,0 +1,45 @@
+<div id="header">
+    <h1>LMNTRIX - Frostmourne.eu</h1>
+</div>
+<div id="loginwrapper">
+    {{#if showLogin}}
+    <div id="login" class="container">
+        <form action="" method="post">
+            <div class="container">
+                <input type="text" placeholder="username..." name="username" required>
+            </div>
+            <div class="container">
+                <input type="password" placeholder="password..." name="password" required>
+            </div>
+            <div class="container">
+                <button type="submit" class="button1">login...</button>
+            </div>
+        </form>
+    </div>
+    {{else}}
+    <div id="login" class="container">
+        <div class="table">
+            <div class="tableColumnFix250">
+                <div class="tableRowNS">
+                    <form action="/admin/dkp" method="get">
+                        <button type="submit" class="button1">ADMIN-DKP</button>
+                    </form>
+                </div>
+                <div class="tableRowNS">
+                    <form action="/admin/member" method="get">
+                        <button type="submit" class="button1">ADMIN-MEMBER-CONTROL</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if error.invalidlogin}}
+    <div class="container">
+        <span>wrong username or password...</span>
+    </div>
+    {{/if}}
+</div>
+
+
